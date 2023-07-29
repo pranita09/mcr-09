@@ -3,3 +3,5 @@ export { SideBar } from "./SideBar";
 export { CategoryCard } from "./CategoryCard";
 export { VideoCard } from "./VideoCard";
 export { SuggestedVideos } from "./SuggestedVideos";
+export { NoteModal } from "./NoteModal";
+export { PlaylistModal } from "./PlaylistModal";

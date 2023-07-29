@@ -18,7 +18,7 @@ export const SuggestedVideos = ({ currentVideo }) => {
           <div
             key={video?._id}
             className="flex justify-center gap-3 cursor-pointer"
-            onClick={() => navigate(`/video?${video?._id}`)}
+            onClick={() => navigate(`/video/${video?._id}`)}
           >
             <img
               src={video?.thumbnail}

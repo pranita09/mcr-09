@@ -12,13 +12,15 @@ export const VideoCard = ({ video }) => {
   const { ADD_TO_WATCH_LATER, REMOVE_FROM_WATCH_LATER } = actionTypes;
 
   return (
-    <div className="w-[20rem] border border-bgSecondary rounded">
+    <div
+      className="w-[20rem] border border-bgSecondary rounded"
+      onClick={() => navigate(`/video/${video?._id}`)}
+    >
       <div className="w-full relative">
         <img
           src={video?.thumbnail}
           alt={video?.title}
           className="object-cover w-full hover:cursor-pointer hover:opacity-95"
-          onClick={() => navigate(`/video/${video?._id}`)}
         />
         <div className="absolute top-0 right-0 bg-white p-1">
           {isPresentInWatchLater(video) ? (

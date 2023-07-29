@@ -9,7 +9,7 @@ export const SideBar = () => {
     backgroundColor: " #8553fa48",
   };
   return (
-    <aside className="sticky flex flex-col justify-between h-[90vh] top-0 left-0 overflow-y-none overflow-x-hidden items-center border-r border-primaryDisabled">
+    <aside className="sticky flex flex-col justify-between h-[100vh] top-0 left-0 overflow-y-none overflow-x-hidden items-center border-r border-primaryDisabled">
       <ul className="flex items-start justify-start flex-col gap-1 tracking-wide grow">
         <li>
           <NavLink
