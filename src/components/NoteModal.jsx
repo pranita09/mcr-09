@@ -18,7 +18,6 @@ export const NoteModal = ({
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (note) {
-      console.log("here");
       dispatch({
         type: UPDATE_NOTE,
         payload: {
