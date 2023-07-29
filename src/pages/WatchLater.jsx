@@ -1,4 +1,4 @@
-import { Header, SideBar, VideoCard } from "../components";
+import { SideBar, VideoCard } from "../components";
 import { useVideos } from "../contexts/videosContext";
 
 export const WatchLater = () => {
@@ -7,7 +7,6 @@ export const WatchLater = () => {
   } = useVideos();
   return (
     <div>
-      <Header />
       <div className="grid grid-cols-[12.5rem_1fr]">
         <SideBar />
         <div className="py-1 px-4">

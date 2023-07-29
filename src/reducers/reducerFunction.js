@@ -1,12 +1,14 @@
 import { categories, videos } from "../data/data";
 import { actionTypes } from "../utils/constants";
 
-const { ADD_TO_WATCH_LATER, REMOVE_FROM_WATCH_LATER } = actionTypes;
+const { ADD_TO_WATCH_LATER, REMOVE_FROM_WATCH_LATER, SET_SEARCH_INPUT } =
+  actionTypes;
 
 export const initialState = {
   categories: categories,
   videos: videos,
   watchLaterVideos: [],
+  searchInput: "",
 };
 
 export const reducerFunction = (state, { type, payload }) => {
@@ -23,6 +25,8 @@ export const reducerFunction = (state, { type, payload }) => {
           (video) => video?._id !== payload?._id
         ),
       };
+    case SET_SEARCH_INPUT:
+      return { ...state, searchInput: payload };
     default:
       return state;
   }
