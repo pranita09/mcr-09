@@ -51,7 +51,7 @@ export const reducerFunction = (state, { type, payload }) => {
         ...state,
         playlists: state?.playlists.map((item) =>
           item._id === payload.playlist
-            ? [...item.videos, payload.currentVideo]
+            ? { ...item, videos: [...item.videos, payload.currentVideo] }
             : item
         ),
       };

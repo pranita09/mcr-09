@@ -48,12 +48,14 @@ export const PlaylistModal = ({ currentVideo, setShowPlaylistModal }) => {
             className="flex justify-between items-center cursor-pointer"
           >
             <p
-              onClick={() =>
+              onClick={() => {
                 dispatch({
                   type: ADD_VIDEO_TO_PLAYLIST,
                   payload: { currentVideo, playlist: playlist._id },
-                })
-              }
+                });
+                toast.success("Video added to the playlist.");
+                setShowPlaylistModal(false);
+              }}
             >
               {playlist?.name}
             </p>
