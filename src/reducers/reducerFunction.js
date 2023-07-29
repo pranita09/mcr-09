@@ -55,8 +55,43 @@ export const reducerFunction = (state, { type, payload }) => {
             : item
         ),
       };
-    // case ADD_NOTE:
-    //   return { ...state, videos: state?.videos.map((video) => video) };
+    case ADD_NOTE:
+      return {
+        ...state,
+        videos: state?.videos.map((video) =>
+          video._id === payload.videoId
+            ? { ...video, notes: [...video.notes, payload.note] }
+            : video
+        ),
+      };
+    case DELETE_NOTE:
+      return {
+        ...state,
+        videos: state?.videos?.map((video) =>
+          video?._id === payload?.currentVideo?._id
+            ? {
+                ...video,
+                notes: video?.notes?.filter(
+                  (note) => note?._id !== payload?.note?._id
+                ),
+              }
+            : video
+        ),
+      };
+    case UPDATE_NOTE:
+      return {
+        ...state,
+        videos: state?.videos?.map((video) =>
+          video?._id === payload?.videoId
+            ? {
+                ...video,
+                notes: video?.notes?.map((note) =>
+                  note?._id === payload?.noteId ? payload?.note : note
+                ),
+              }
+            : video
+        ),
+      };
     default:
       return state;
   }

@@ -28,13 +28,13 @@ export const SingleVideo = () => {
   } = useVideos();
 
   const [showNoteModal, setShowNoteModal] = useState(false);
+  const [showNoteModalToUpdate, setShowNoteModalToUpdate] = useState(false);
   const [showPlaylistModal, setShowPlaylistModal] = useState(false);
 
-  const { ADD_TO_WATCH_LATER, REMOVE_FROM_WATCH_LATER } = actionTypes;
+  const { ADD_TO_WATCH_LATER, REMOVE_FROM_WATCH_LATER, DELETE_NOTE } =
+    actionTypes;
 
   const currentVideo = videos?.find((video) => video?._id === +videoId);
-
-  console.log(currentVideo);
 
   return (
     <div>
@@ -47,7 +47,6 @@ export const SingleVideo = () => {
                 src={currentVideo?.src}
                 title={currentVideo?.title}
                 className="w-full h-[400px]"
-                autoplay
               ></iframe>
             </div>
             <div className="flex items-center justify-between py-4 border-b border-bgSecondary">
@@ -107,22 +106,44 @@ export const SingleVideo = () => {
             </div>
             <div className="py-2">
               <p className="text-2xl">My Notes</p>
-              <div className="flex flex-col items-center justify-start gap-2">
+              <div className="flex flex-col items-start justify-center gap-2 py-4">
                 {currentVideo?.notes?.length > 0 &&
                   currentVideo?.notes?.map((note) => (
                     <div
                       key={note?._id}
-                      className="flex items-center justify-between"
+                      className="flex items-center justify-start gap-12"
                     >
                       <p>{note?.content}</p>
                       <div className="flex items-center justify-center gap-4">
-                        <span>
+                        <span onClick={() => setShowNoteModalToUpdate(true)}>
                           <HiPencil
                             className="text-2xl cursor-pointer"
                             title="Update note"
                           />
                         </span>
-                        <span>
+                        {showNoteModalToUpdate && (
+                          <Modal
+                            open={showNoteModalToUpdate}
+                            onClose={() => setShowNoteModalToUpdate(false)}
+                          >
+                            <>
+                              <NoteModal
+                                setShowNoteModalToUpdate={
+                                  setShowNoteModalToUpdate
+                                }
+                                note={note}
+                              />
+                            </>
+                          </Modal>
+                        )}
+                        <span
+                          onClick={() =>
+                            dispatch({
+                              type: DELETE_NOTE,
+                              payload: { note, currentVideo },
+                            })
+                          }
+                        >
                           <BiSolidTrashAlt
                             className="text-2xl cursor-pointer"
                             title="Delete note"
@@ -141,7 +162,10 @@ export const SingleVideo = () => {
       {showNoteModal && (
         <Modal open={showNoteModal} onClose={() => setShowNoteModal(false)}>
           <>
-            <NoteModal setShowNoteModal={setShowNoteModal} />
+            <NoteModal
+              currentVideo={currentVideo}
+              setShowNoteModal={setShowNoteModal}
+            />
           </>
         </Modal>
       )}

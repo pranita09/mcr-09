@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { actionTypes, styles } from "../utils/constants";
 import { useVideos } from "../contexts/videosContext";
+import { v4 as uuid } from "uuid";
 
-export const NoteModal = ({ note, setShowNoteModal }) => {
+export const NoteModal = ({
+  currentVideo,
+  note,
+  setShowNoteModal,
+  setShowNoteModalToUpdate,
+}) => {
   const { dispatch } = useVideos();
 
   const [noteInput, setNoteInput] = useState(note ? note?.content : "");
@@ -12,18 +18,27 @@ export const NoteModal = ({ note, setShowNoteModal }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (note) {
+      console.log("here");
       dispatch({
         type: UPDATE_NOTE,
-        payload: { content: noteInput, _id: note?._id },
+        payload: {
+          note: { ...note, content: noteInput },
+          videoId: currentVideo?._id,
+          noteId: note?._id,
+        },
       });
     } else {
       dispatch({
         type: ADD_NOTE,
-        payload: { content: noteInput, _id: new Date() },
+        payload: {
+          note: { content: noteInput, _id: uuid() },
+          videoId: currentVideo?._id,
+        },
       });
     }
     setNoteInput("");
-    setShowNoteModal(false);
+    setShowNoteModal && setShowNoteModal(false);
+    setShowNoteModalToUpdate && setShowNoteModalToUpdate(false);
   };
 
   return (
