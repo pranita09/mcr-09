@@ -5,8 +5,12 @@ export const VideosContext = createContext();
 
 export const VideosProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducerFunction, initialState);
+
+  const isPresentInWatchLater = (videoToCheck) =>
+    state.watchLaterVideos.find((video) => video?._id === videoToCheck?._id);
+
   return (
-    <VideosContext.Provider value={{ state, dispatch }}>
+    <VideosContext.Provider value={{ state, dispatch, isPresentInWatchLater }}>
       {children}
     </VideosContext.Provider>
   );
