@@ -22,7 +22,7 @@ export const Header = () => {
         <GrSearch className="text-lg text-[lightGray]" />
         <input
           type="text"
-          placeholder="Search videos..."
+          placeholder="Search video by title"
           value={state?.searchInput}
           className="outline-none py-1 rounded text-sm"
           onChange={(e) => {
