@@ -49,6 +49,7 @@ export const NoteModal = ({
           value={noteInput}
           className="border border-textSecondary  py-1 px-2 rounded"
           onChange={(e) => setNoteInput(e.target.value)}
+          required
         />
         <button
           type="submit"

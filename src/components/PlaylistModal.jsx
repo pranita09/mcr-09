@@ -33,6 +33,7 @@ export const PlaylistModal = ({ currentVideo, setShowPlaylistModal }) => {
           value={playlistInput}
           className="border border-textSecondary rounded py-1 px-3 text-sm"
           onChange={(e) => setPlaylistInput(e.target.value)}
+          required
         />
         <button
           type="submit"
